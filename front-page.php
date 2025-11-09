@@ -14,14 +14,14 @@
     <div class="full-width-split__one">
         <div class="full-width-split__inner">
             <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
-            <?php 
-                $homePageEvents = new WP_Query(array(
-                    'posts_per_page' => 2,
-                    'post_type' => 'event',
-                ));
+            <?php
+            $homePageEvents = new WP_Query(array(
+                'posts_per_page' => 2,
+                'post_type' => 'event',
+            ));
 
-                while($homePageEvents->have_posts()){
-                    $homePageEvents->the_post(); ?>
+            while ($homePageEvents->have_posts()) {
+                $homePageEvents->the_post(); ?>
 
                 <div class="event-summary">
                     <a class="event-summary__date t-center" href="#">
@@ -30,14 +30,22 @@
                     </a>
                     <div class="event-summary__content">
                         <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h5>
-                        <php><?php echo wp_trim_words(get_the_content(), 18) ?> <a href="<?php the_permalink(); ?>"  class="nu gray">Learn more</a></p>
+                        <php>
+                            <?php
+                            if (has_excerpt()) {
+                                echo get_the_excerpt();
+                            } else {
+                                echo wp_trim_words(get_the_content(), 18);
+                            }
+                            ?>
+                            <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
                     </div>
                 </div>
 
-                <?php }
+            <?php }
             ?>
 
-            <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+            <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
     </div>
     <div class="full-width-split__two">
@@ -58,12 +66,21 @@
                     </a>
                     <div class="event-summary__content">
                         <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>">
-                            <?php the_title(); ?>
-                        </a></h5>
-                        <p> <?php echo wp_trim_words(get_the_content(), 18); ?> <a href="<?php the_permalink(); ?>" class="nu gray">Read more</a></p>
+                                <?php the_title(); ?>
+                            </a></h5>
+                        <p> <?php
+                            if (has_excerpt()) {
+                                echo get_the_excerpt();
+                            } else {
+                                echo wp_trim_words(get_the_content(), 18);
+                            }
+                            ?>
+                            <a href="<?php the_permalink(); ?>" class="nu gray">Read more</a>
+                        </p>
                     </div>
                 </div>
-            <?php } wp_reset_postdata();
+            <?php }
+            wp_reset_postdata();
             ?>
 
             <p class="t-center no-margin"><a href="<?php echo site_url('/blog'); ?>" class="btn btn--yellow">View All Blog Posts</a></p>

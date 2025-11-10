@@ -25,8 +25,17 @@
 
                 <div class="event-summary">
                     <a class="event-summary__date t-center" href="#">
-                        <span class="event-summary__month">Mar</span>
-                        <span class="event-summary__day">25</span>
+                        <span class="event-summary__month">
+                            <?php
+                                $eventDateCapture = new DateTime(get_field('event_date'));
+                                echo $eventDateCapture->format('M');
+                            ?>
+                        </span>
+                        <span class="event-summary__day">
+                            <?php
+                                echo $eventDateCapture->format('d');
+                            ?>
+                        </span>
                     </a>
                     <div class="event-summary__content">
                         <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h5>

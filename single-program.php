@@ -26,7 +26,7 @@ while (have_posts()) {
         <?php
         $today = date('Ymd');
         $relatedProfessor = new WP_Query(array(
-            'posts_per_page' => 2,
+            'posts_per_page' => -1,
             'post_type' => 'professor',
             'orderby' => 'title',
             'order' => 'ASC',

@@ -14,7 +14,7 @@ while (have_posts()) {
     $year = $campusDateCapture->format('Y');
     $establishmentDate = $date . " / " . $month . " / " . $year;
 
-    $campusImage = get_field('page_banner_background')['sizes']['campusBanner']; 
+    $campusImage = get_field('page_banner_background')['sizes']['campusBanner'];
 ?>
 
 
@@ -25,14 +25,60 @@ while (have_posts()) {
             </p>
         </div>
 
-        <div class="two-thirds">
-            <img src="<?php echo $campusImage; ?>" alt="Campus Image">
+        <div class="generic-content">
+            <div class="row group">
+
+                <div class="two-thirds">
+                    <img src="<?php echo $campusImage; ?>" alt="Campus Image">
+                </div>
+
+                <div class="one-third">
+                    <?php the_content(); ?>
+                </div>
+
+            </div>
         </div>
 
-        <div class="one-third">
-            <?php the_content(); ?>
+
+        <div>
+            <?php
+            wp_reset_postdata();
+
+            $relatedPrograms = new WP_Query(array(
+                'posts_per_page' => -1,
+                'post_type' => 'program',
+                'orderby' => 'title',
+                'order' => 'ASC',
+                'meta_query' => array(
+                    array(
+                        'key' => 'related_campus',
+                        'compare' => 'LIKE',
+                        'value' => '"' . get_the_ID() . '"'
+                    )
+                )
+            ));
+
+            if ($relatedPrograms->have_posts()) {
+                echo '<hr class="section-break">';
+                echo '<h2 class="headline headline--medium"> Programs Available in this Campus</h2>';
+
+                echo '<ul class="professor-cards">';
+                while ($relatedPrograms->have_posts()) {
+                    $relatedPrograms->the_post(); ?>
+                    <li>
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                        </a>
+                    </li>
+            <?php }
+                echo '</ul>';
+            };
+
+            wp_reset_postdata(); ?>
         </div>
+
     </div>
+
 <?php
 }
 get_footer();

@@ -80,6 +80,13 @@
                 )
             ));
         }
+        
+        if (!is_admin() AND is_post_type_archive('campus') AND $query->is_main_query()) {
+            $query->set('meta_key', 'establishment_year');
+            $query->set('orderby', 'meta_value_num');
+            $query->set('order', 'ASC');
+        }
+
     }
 
     add_action('pre_get_posts', 'university_adjust_queries');

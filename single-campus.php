@@ -62,7 +62,7 @@ while (have_posts()) {
                 echo '<hr class="section-break">';
                 echo '<h2 class="headline headline--medium"> Programs Available in this Campus</h2>';
 
-                echo '<ul class="professor-cards">';
+                echo '<ul class="link-list min-list">';
                 while ($relatedPrograms->have_posts()) {
                     $relatedPrograms->the_post(); ?>
                     <li>

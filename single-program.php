@@ -2,11 +2,11 @@
 get_header();
 
 while (have_posts()) {
-    the_post(); 
-    pageBanner(array( 
+    the_post();
+    pageBanner(array(
         'title' => get_the_title()
     ));
-    ?>
+?>
 
     <div class="container container--narrow page-section">
         <div class="metabox metabox--position-up metabox--with-home-link">
@@ -108,8 +108,25 @@ while (have_posts()) {
                     </div>
                 </div>
 
-        <?php }
+            <?php }
         }
+
+        wp_reset_postdata();
+        $relatedCampuses = get_field('related_campus');
+        if ($relatedCampuses) {
+            echo '<hr class="section-break">';
+            echo '<h2 class="headline headline--medium">'. get_the_title() . ' is available on these campuses.</h2>';
+            echo '<ul class="link-list min-list">';
+            foreach ($relatedCampuses as $campus) { ?>
+                <li>
+                    <a href="<?php echo get_the_permalink($campus); ?>">
+                        <?php echo get_the_title($campus); ?>
+                    </a>
+                </li>
+        <?php }
+            echo '</ul>';
+        }
+
         ?>
     </div>
 <?php

@@ -14,10 +14,10 @@ pageBanner(array(
             <a class="campus-summary__date t-center" href="<?php the_permalink(); ?>">
                 <span class="campus-summary__month">
                     <?php
-                    $eventDateCapture = new DateTime(get_field('establishment_year'));
-                    $month = $eventDateCapture->format('M');
-                    $date = $eventDateCapture->format('d');
-                    $year = $eventDateCapture->format('Y');
+                    $campusDateCapture = new DateTime(get_field('establishment_year'));
+                    $month = $campusDateCapture->format('M');
+                    $date = $campusDateCapture->format('d');
+                    $year = $campusDateCapture->format('Y');
                     echo $month . " " . $date;
                     ?>
                 </span>

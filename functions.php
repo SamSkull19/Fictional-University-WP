@@ -55,6 +55,7 @@
         add_image_size('professorLandscape', '400', '280', true);
         add_image_size('professorPortrait', '480', '650', true);
         add_image_size('pageBanner', '700', '180', true);
+        add_image_size('campusBanner', '700', '300', true);
     }
 
     add_action('after_setup_theme', 'university_features');

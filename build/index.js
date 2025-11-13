@@ -4029,13 +4029,22 @@ class Search {
     this.openButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".js-search-trigger");
     this.closeButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay__close");
     this.searchOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay");
+    this.searchfield = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-term');
     this.isOverlayOpen = false;
     this.events();
+    this.typingTimer;
   }
   events() {
     this.openButton.on("click", this.openOverlay.bind(this));
     this.closeButton.on("click", this.closeOverlay.bind(this));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("keydown", this.keyPressDispatcher.bind(this));
+    this.searchfield.on("keyup", this.typingLogic.bind(this));
+  }
+  typingLogic() {
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(function () {
+      console.log("This is a timeout test.");
+    }, 2000);
   }
   keyPressDispatcher(e) {
     if (e.keyCode == 83 && !this.isOverlayOpen) {

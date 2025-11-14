@@ -43,7 +43,17 @@ class Search {
 
     getResults() {
         $.getJSON('http://fictional-university.local/wp-json/wp/v2/posts?search=' + this.searchField.val(), (posts) => {
-            alert(posts[0].title.rendered)
+            this.resultsDiv.html(`
+               <h2 class="search-overlay__section-title">Searched Posts</h2> 
+               
+               <ul class="link-list min-list"> 
+                    ${posts.map(post => {
+                        return `<li>
+                            <a href="${post.link}"> ${post.title.rendered} </a>
+                        </li>`
+                    }).join('')}
+               </ul>
+            `);
         })
     }
 

@@ -42,8 +42,9 @@ class Search {
     }
 
     getResults() {
-        this.resultsDiv.html("Imagine real search results here...");
-        this.isSpinnerVisible = false;
+        $.getJSON('http://fictional-university.local/wp-json/wp/v2/posts?search=' + this.searchField.val(), (posts) => {
+            alert(posts[0].title.rendered)
+        })
     }
 
     keyPressDispatcher(e) {

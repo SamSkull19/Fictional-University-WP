@@ -10,5 +10,22 @@
     }
 
     function universitySearchResults(){
-        return 'Route Added';
+        $professors = new WP_Query(array(
+            'post_type' => 'professor'
+        ));
+
+        $professorsResults = array();
+
+        while($professors->have_posts()){
+            $professors->the_post();
+
+            array_push($professorsResults, array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink(),
+            ));
+        }
+
+        wp_reset_postdata();
+
+        return $professorsResults;
     }

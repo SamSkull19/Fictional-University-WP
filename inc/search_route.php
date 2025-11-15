@@ -47,6 +47,7 @@
                 array_push($results['program'], array(
                     'title' => get_the_title(),
                     'permalink' => get_the_permalink(),
+                    'id' => get_the_id()
                 ));
             }
             
@@ -78,29 +79,36 @@
             }
         }
 
-        $programRelationshipQuery = new WP_Query(array(
-            'post_type' => 'professor',
-            'meta_query' => array(
-                array(
+        if($results['program']){
+            $programsMetaQuery = array('relation' => 'OR');
+
+            foreach($results['program'] as $item) {
+                array_push($programsMetaQuery, array(
                     'key' => 'related_program',
                     'compare' => 'LIKE',
-                    'value' => '"74"',
-                )
-            )
-        ));
-
-        while($programRelationshipQuery->have_posts()){
-            $programRelationshipQuery->the_post();
-
-            if(get_post_type() == 'professor'){
-                array_push($results['professor'], array(
-                    'title' => get_the_title(),
-                    'permalink' => get_the_permalink(),
-                    'image' => get_the_post_thumbnail_url(0, 'professorLandscape')
+                    'value' => '"' . $item['id'] . '"'
                 ));
             }
-        }
 
-        $results['professor'] = array_values(array_unique($results['professor'], SORT_REGULAR));
+            $programRelationshipQuery = new WP_Query(array(
+                'post_type' => 'professor',
+                'meta_query' => $programsMetaQuery
+            ));
+
+            while($programRelationshipQuery->have_posts()){
+                $programRelationshipQuery->the_post();
+
+                if(get_post_type() == 'professor'){
+                    array_push($results['professor'], array(
+                        'title' => get_the_title(),
+                        'permalink' => get_the_permalink(),
+                        'image' => get_the_post_thumbnail_url(0,    'professorLandscape')
+                    ));
+                }
+            }
+
+            $results['professor'] = array_values(array_unique($results['professor'], SORT_REGULAR));
+        }
+        
         return $results;
     }

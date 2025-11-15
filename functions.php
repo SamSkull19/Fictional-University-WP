@@ -1,4 +1,5 @@
 <?php 
+    require get_theme_file_path('/inc/search_route.php');
 
     function university_custom_rest(){
         register_rest_field('post', 'authorName', array(

@@ -4070,7 +4070,7 @@ class Search {
                
                     ${combineResults.map(post => {
         return `<li>
-                            <a href="${post.link}"> ${post.title.rendered} </a>
+                            <a href="${post.link}"> ${post.title.rendered} </a> ${post.type == 'post' ? `by ${post.authorName}` : ''}
                         </li>`;
       }).join('')}
 

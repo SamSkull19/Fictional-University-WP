@@ -53,7 +53,7 @@
             if(get_post_type() == 'event'){
                 $eventDate = new DateTime(get_field('event_date'));
                 $description = null;
-                
+
                 if (has_excerpt()) {
                     $description = get_the_excerpt();
                 } 
@@ -78,7 +78,29 @@
             }
         }
 
-        wp_reset_postdata();
+        $programRelationshipQuery = new WP_Query(array(
+            'post_type' => 'professor',
+            'meta_query' => array(
+                array(
+                    'key' => 'related_program',
+                    'compare' => 'LIKE',
+                    'value' => '"74"',
+                )
+            )
+        ));
 
+        while($programRelationshipQuery->have_posts()){
+            $programRelationshipQuery->the_post();
+
+            if(get_post_type() == 'professor'){
+                array_push($results['professor'], array(
+                    'title' => get_the_title(),
+                    'permalink' => get_the_permalink(),
+                    'image' => get_the_post_thumbnail_url(0, 'professorLandscape')
+                ));
+            }
+        }
+
+        $results['professor'] = array_values(array_unique($results['professor'], SORT_REGULAR));
         return $results;
     }

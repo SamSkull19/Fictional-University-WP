@@ -44,6 +44,17 @@
             }
             
             if(get_post_type() == 'program'){
+                $relatedCampus = get_field('related_campus');
+
+                if($relatedCampus){
+                    foreach($relatedCampus as $campus){
+                        array_push($results['campus'], array(
+                            'title' => get_the_title($campus),
+                            'permalink' => get_the_permalink($campus),
+                        ));
+                    }
+                }
+
                 array_push($results['program'], array(
                     'title' => get_the_title(),
                     'permalink' => get_the_permalink(),

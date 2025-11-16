@@ -47,8 +47,8 @@
                             <span class="btn_text">Logout</span>
                         </a>
                     <?php } else { ?>
-                        <a href="#" class="btn btn--small btn--orange float-left push-right">Login</a>
-                        <a href="<?php echo esc_url(site_url('/wp-signup.php')); ?>" class="btn btn--small btn--dark-orange float-left">Sign Up</a>
+                        <a href="<?php wp_login_url(); ?>" class="btn btn--small btn--orange float-left push-right">Login</a>
+                        <a href="<?php wp_registration_url(); ?>" class="btn btn--small btn--dark-orange float-left">Sign Up</a>
                     <?php } ?>
 
                     <a href="<?php echo esc_url(site_url('/search')); ?>" class="search-trigger js-search-trigger"><i class="fa fa-search" aria-hidden="true"></i></a>

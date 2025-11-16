@@ -11,8 +11,8 @@ pageBanner(array(
     while (have_posts()) {
         the_post(); ?>
         <div class="event-summary">
-            <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
-                <span class="event-summary__month">
+            <a class="campus-summary__date t-center" href="<?php the_permalink(); ?>">
+                <span class="campus-summary__month">
                     <?php
                     $campusDateCapture = new DateTime(get_field('establishment_year'));
                     $month = $campusDateCapture->format('M');
@@ -22,7 +22,7 @@ pageBanner(array(
                     ?>
                 </span>
 
-                <span class="event-summary__year">
+                <span class="event-summary__month">
                     <?php
                     echo $year;
                     ?>

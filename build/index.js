@@ -4029,20 +4029,21 @@ __webpack_require__.r(__webpack_exports__);
 
 class MyNotes {
   constructor() {
-    console.log(universityData.nonce);
     this.events();
   }
   events() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".delete-note").on("click", this.deleteNote.bind(this));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".delete-note").on("click", this.deleteNote);
   }
-  deleteNote() {
+  deleteNote(e) {
+    var thisNote = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents('li');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       beforeSend: xhr => {
         xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
       },
-      url: universityData.root_url + "/wp-json/wp/v2/note/138",
+      url: universityData.root_url + '/wp-json/wp/v2/note/' + thisNote.data('id'),
       type: "DELETE",
       success: response => {
+        thisNote.slideUp();
         console.log("Congrats");
         console.log(response);
       },

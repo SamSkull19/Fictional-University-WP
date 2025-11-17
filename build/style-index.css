@@ -1651,6 +1651,48 @@ body.admin-bar .search-overlay {
   font-size: 2.02rem;
   font-weight: 700;
 }
+.campus-summary {
+  position: relative;
+  padding-left: 107px;
+  min-height: 77px;
+  padding-bottom: 1px;
+  margin-bottom: 20px;
+}
+.campus-summary__title a {
+  color: #173f58;
+}
+.campus-summary__date {
+  text-decoration: none;
+  display: block;
+  top: 0;
+  left: 0;
+  position: absolute;
+  padding: 14px 0 11px 0;
+  color: #FFF;
+  border-radius: 20%;
+  background-color: #0D3B66;
+  width: 100px;
+  line-height: 1;
+  transition: opacity 0.33s;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.22);
+}
+.campus-summary__date:hover {
+  opacity: 0.75;
+}
+.campus-summary__date--beige {
+  background-color: #F4D35E;
+}
+.campus-summary__month {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.campus-summary__day {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 .page-links {
   position: relative;
   z-index: 1;

@@ -10,7 +10,7 @@ pageBanner(array(
     <?php
     while (have_posts()) {
         the_post(); ?>
-        <div class="event-summary">
+        <div class="campus-summary">
             <a class="campus-summary__date t-center" href="<?php the_permalink(); ?>">
                 <span class="campus-summary__month">
                     <?php
@@ -22,14 +22,14 @@ pageBanner(array(
                     ?>
                 </span>
 
-                <span class="event-summary__month">
+                <span class="campus-summary__month">
                     <?php
                     echo $year;
                     ?>
                 </span>
             </a>
-            <div class="event-summary__content">
-                <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h5>
+            <div class="campus-summary__content">
+                <h5 class="campus-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h5>
                 <php><?php echo wp_trim_words(get_the_content(), 18) ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
             </div>
         </div>

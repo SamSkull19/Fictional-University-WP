@@ -1684,7 +1684,7 @@ body.admin-bar .search-overlay {
 .campus-summary__month {
   display: block;
   font-size: 1.3rem;
-  font-weight: 300;
+  font-weight: 500;
   text-transform: uppercase;
 }
 .campus-summary__day {

@@ -4029,14 +4029,28 @@ __webpack_require__.r(__webpack_exports__);
 
 class MyNotes {
   constructor() {
-    alert("Joy Bangla R");
+    console.log(universityData.nonce);
     this.events();
   }
   events() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".delete-note").on("click", this.deleteNote);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".delete-note").on("click", this.deleteNote.bind(this));
   }
   deleteNote() {
-    alert("Joy Bangla");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      beforeSend: xhr => {
+        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
+      },
+      url: universityData.root_url + "/wp-json/wp/v2/note/138",
+      type: "DELETE",
+      success: response => {
+        console.log("Congrats");
+        console.log(response);
+      },
+      error: response => {
+        console.log("Sorry");
+        console.log(response);
+      }
+    });
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyNotes);

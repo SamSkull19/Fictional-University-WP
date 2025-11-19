@@ -4017,10 +4017,28 @@ class Like {
     }
   }
   createLike() {
-    alert('Samin');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: universityData.root_url + '/wp-json/university/v1/manageLike',
+      type: 'POST',
+      success: response => {
+        console.log(response);
+      },
+      error: response => {
+        console.log(response);
+      }
+    });
   }
   deleteLike() {
-    alert('Sifat');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: universityData.root_url + '/wp-json/university/v1/manageLike',
+      type: 'DELETE',
+      success: response => {
+        console.log(response);
+      },
+      error: response => {
+        console.log(response);
+      }
+    });
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Like);
